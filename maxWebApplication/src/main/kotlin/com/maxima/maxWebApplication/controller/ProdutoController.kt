@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
 @RestController
 @RequestMapping("produto")
 class ProdutoController(private val _produtoRepository: ProdutoRepository) {
@@ -14,8 +15,14 @@ class ProdutoController(private val _produtoRepository: ProdutoRepository) {
     @GetMapping
     fun listarTodosProduto() = ResponseEntity.ok(_produtoRepository.findAll())
 
-    @GetMapping("{/codigo}")
-    fun listarProduto(@PathVariable("codigo") codigo: String) = ResponseEntity.ok(_produtoRepository.findById(codigo))
+    @GetMapping("/{nome}")
+    fun listarProduto(@PathVariable("nome") nome: String): ResponseEntity<List<Produto>> {
+
+        val produto = _produtoRepository.findAll()
+        val filteredProdutos = produto.filter { it.nome.contains(nome.toLowerCase()) }
+
+        return ResponseEntity.ok(filteredProdutos)
+    }
 
     @PostMapping
     fun gravaProdutos(@RequestBody produtoBody: ProdutoRequest): ResponseEntity<Produto> {
