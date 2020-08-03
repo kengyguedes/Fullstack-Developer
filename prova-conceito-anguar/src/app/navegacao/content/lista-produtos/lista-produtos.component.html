@@ -1,0 +1,34 @@
+<mat-list *ngIf="listProd.length > 0" style="height: 300px;">
+  <mat-list-item class="hue" *ngFor="let produto of listProd">
+    <div fxLayout="column" style="width: 100%;">
+      <div fxLayout="row" fxLayoutAlign="space-between stretch">
+        <div fxFlex="10%">
+          <img src="/assets/foto-coca-cola.png" height="101px">
+        </div>
+        <div fxFlex="70%">
+          <div *ngIf="produto !=null">{{produto.codigo}}</div>
+          <div *ngIf="produto !=null">{{produto.nome}}</div>
+        </div>
+
+        <div fxLayout="column" fxFlex="18%">
+          <div fxLayoutAlign="end" *ngIf="produto !=null">
+            <input #teste style="width:35px; height: 35px;" type="number" (input)="this.vlrQtProd=$event.target.value">
+            x{{produto.precoUnitario}}
+          </div>
+          <div fxLayoutAlign="end" *ngIf="produto !=null">{{produto.precoUnitario* vlrQtProd}}</div>
+        </div>
+        <div fxFlex="5%" fxLayoutAlign="end">
+          <button mat-mini-fab color="primary" aria-label="Delete">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+  </mat-list-item>
+</mat-list>
+
+<h1 style="size: 50px; " fxLayoutAlign="center" *ngIf="listProd.length ==0">Sem itens na lista</h1>

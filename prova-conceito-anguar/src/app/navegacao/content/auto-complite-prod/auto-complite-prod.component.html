@@ -1,0 +1,30 @@
+<!-- <form class="example-form">
+  <mat-form-field class="example-full-width" style="width: 500px;">
+    <input type="text" placeholder="Pesquise um produto *" matInput [formControl]="myControlProd"
+      [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption (optionSelected)="selectedOption($event)" #auto="matAutocomplete">
+      <mat-option *ngFor="let produto of filteredProdutos | async" [value]="produto">
+        {{produto}}
+      </mat-option>
+      <mat-icon matSuffix>folder</mat-icon>
+
+    </mat-autocomplete>
+
+  </mat-form-field>
+</form> -->
+
+
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Produtos" aria-label="Produtos" [matAutocomplete]="auto"
+      [formControl]="stateCtrlProdutos">
+    <mat-autocomplete (optionSelected)="selectedOption($event)" #auto="matAutocomplete">
+      <mat-option *ngFor="let produto of filteredProdutos | async, let i=index" [value]="produto">
+        <!-- <small> {{produto.nome}}</small> -->
+        {{produto.nome}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <br />
+</form>

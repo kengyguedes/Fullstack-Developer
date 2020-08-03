@@ -1,0 +1,86 @@
+<div style="margin-top:16px;">
+  <span style="font-weight: bold ; font-size: x-large; margin-left: 16px;">Novo pedido #12345678 </span>
+</div>
+
+<!-- <mat-card style="margin: 16px;">
+  <mat-card-title>Cliente</mat-card-title>
+  <form class="example-form">
+    <mat-form-field class="example-full-width" style="width: 500px;">
+      <input type="text" placeholder="Informe um cliente *" matInput [formControl]="stateCtrlCliente" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let cliente of filteredStatesCliente | async" [value]="cliente">
+          {{cliente}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</mat-card> -->
+
+<mat-card style="margin: 16px;">
+<mat-card-title>Cliente</mat-card-title>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Cliente" aria-label="Cliente" [matAutocomplete]="auto" [formControl]="stateCtrlCliente">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let cliente of filteredStatesCliente | async, let i=index" [value]="cliente.nome">
+        <!-- <small> {{produto.nome}}</small> -->
+        {{cliente.nome}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <br />
+</form>
+</mat-card>
+
+
+
+
+<!-- Card-Carrinho-->
+<mat-card style="margin:16px; height: 400px;">
+  <mat-card-title>Carrinho</mat-card-title>
+
+  <app-auto-complite-prod></app-auto-complite-prod>
+
+  <mat-card-content [style.overflow]="'auto'" [style.height.px]="'300'">
+    <!--Lista de Produtos-->
+    <app-lista-produtos></app-lista-produtos>
+
+  </mat-card-content>
+
+</mat-card>
+
+
+
+<mat-card style="margin: 16px; height: 150px;">
+  <mat-card-title>Total</mat-card-title>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div fxLayout="column" fxFlex="50%" fxLayoutGap="10px">
+      <div fxlayou="row" fxLayoutGap="300px">
+        <mat-label fxFlex="50%">Itens</mat-label>
+        <mat-label fxFlex="50%">{{vlrPedido}}</mat-label>
+      </div>
+
+      <div fxlayou="row" fxLayoutGap="300px">
+        <mat-label fxFlex="50%">Valor Frete</mat-label>
+        <mat-label fxFlex="50%">R$ 40,00</mat-label>
+      </div>
+
+      <div>
+        <mat-divider fxFlex="40%" style="margin-left: 16px;"></mat-divider>
+      </div>
+
+      <div fxlayou="row" fxLayoutGap="300px">
+        <mat-label fxFlex="50%">Total</mat-label>
+        <mat-label fxFlex="50%">R$ 150,00</mat-label>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%" fxLayoutAlign="space-around end">
+      <button class="buttons-card-total" mat-flat-button color="primary"
+        style="background-color: rgb(70, 187, 105);">Finalizar Pedido</button>
+      <button class="buttons-card-total" mat-flat-button color="primary"
+        style="background-color: white; color: black;">Limpar Carrinho</button>
+    </div>
+  </div>
+
+</mat-card>
